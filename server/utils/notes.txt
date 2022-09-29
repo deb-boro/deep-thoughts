@@ -1,0 +1,108 @@
+
+################################## Add User################################
+
+mutation addUser($username: String!, $password: String!, $email: String!) {
+  addUser(username: $username, password: $password, email: $email) {
+    _id
+    username
+    email
+  }
+}
+
+
+{
+  "username": "tester2",
+  "password": "test12345",
+  "email": "test2@test.com"
+}
+
+
+
+###########################Login ################################
+
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
+    }
+  }
+}
+
+
+Variables :
+{
+"password": "test12345",
+"email": "test2@test.com”
+}
+
+
+
+################################### Add Thoughts###################################
+mutation addThought($thoughtText: String!) {
+  addThought(thoughtText: $thoughtText) {
+    _id
+    thoughtText
+    createdAt
+    username
+    reactionCount
+  }
+}
+{
+  "thoughtText": "I think GraphQL is pretty cool."
+}
+
+###################################### Add Friends #####################################
+
+mutation addFriend($friendId: ID!) {
+  addFriend(friendId: $friendId) {
+    _id
+    username
+    friendCount
+    friends {
+      _id
+      username
+    }
+  }
+}
+{
+        "friendId": "633102e1ef8d3025e5c02b2f",
+       
+}
+
+##################################  Add Reactions #####################################
+mutation addReaction($thoughtId: ID!, $reactionBody: String!) {
+  addReaction(thoughtId: $thoughtId, reactionBody: $reactionBody) {
+    _id
+    reactionCount
+    reactions {
+      _id
+      reactionBody
+      createdAt
+      username
+    }
+  }
+}
+{
+  "thoughtId": "5ed7f1e96764053f245e9e92",
+  "reactionBody": "I agree!"
+}
+
+###################################Query Thoughts###################################
+{
+  me {
+    thoughts {
+      _id
+      thoughtText
+    }
+  }
+}
+
+##################################### Query User ######################################
+
+query {
+  users {
+    _id
+    username
+  }
+}
